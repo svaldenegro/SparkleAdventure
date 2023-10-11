@@ -1,10 +1,10 @@
 using System.Numerics;
 using Raylib_cs;
-using Sparkle.csharp;
-using Sparkle.csharp.entity;
-using Sparkle.csharp.graphics.util;
-using Sparkle.csharp.gui;
-using Sparkle.csharp.scene;
+using Sparkle;
+using Sparkle.Entity;
+using Sparkle.Graphics.util;
+using Sparkle.Gui;
+using Sparkle.Scene;
 
 namespace Test; 
 
@@ -13,36 +13,37 @@ public class TestScene : Scene {
     private TestGui _gui;
 
     public TestScene(string name) : base(name) {
-        this._gui = new TestGui("test");
+        _gui = new TestGui("test");
     }
 
     protected override void Init() {
 
-        Vector3 pos = new Vector3(10.0f, 10.0f, 10.0f);
-        Cam3D cam3D = new Cam3D(pos, 70, CameraMode.CAMERA_ORBITAL) {
-            Target = new Vector3(0, 0, 0)
+        Vector3 pos = new Vector3(0, 2f, -10.0f);
+        Cam3D cam3D = new Cam3D(pos, 70, CameraMode.CAMERA_FREE) {
+            target = new Vector3(0, 0, 0),
+            up = Vector3.UnitY
         };
-        this.AddEntity(cam3D);
+        AddEntity(cam3D);
         
         Cam2D cam2D = new Cam2D(new Vector2(10, 10), new Vector2(10, 10), Cam2D.CameraMode.Normal);
-        this.AddEntity(cam2D);
+        AddEntity(cam2D);
         
         /*
         for (int i = 0; i < 1000; i++) {
             this.AddEntity(new TestEntity(new Vector3(0, i, 0)));
         }*/
 
-        TestEntity entity = new TestEntity(new Vector3(0, 20, 0));
-        this.AddEntity(entity);
+        TestEntity entity = new TestEntity(new Vector3(0, 0, 0));
+        AddEntity(entity);
         
-        this.AddEntity(new GroundEntity(Vector3.Zero));
+        AddEntity(new GroundEntity(Vector3.Zero));
     }
 
     protected override void Update() {
         base.Update();
         
         if (Input.IsKeyPressed(KeyboardKey.KEY_E)) {
-            GuiManager.SetGui(this._gui);
+            GuiManager.SetGui(_gui);
         }
 
         if (Input.IsKeyPressed(KeyboardKey.KEY_R)) {
@@ -73,15 +74,15 @@ public class TestScene : Scene {
         // END 3D
         SceneManager.MainCamera.EndMode3D();*/
 
-        Cam2D cam2D = (Cam2D) this.GetEntity(1);
+        Cam2D cam2D = (Cam2D) GetEntity(1);
 
         if (Input.IsKeyDown(KeyboardKey.KEY_A)) {
-            cam2D.Target.X += 10.0F * Time.Delta;
+            cam2D.target.X += 10.0F * Time.Delta;
         }
         
         cam2D.BeginMode2D();
         
-        ShapeHelper.DrawRectangle((int) cam2D.Target.X, (int) cam2D.Target.Y, 5, 5, Color.WHITE);
+        ShapeHelper.DrawRectangle((int) cam2D.target.X, (int) cam2D.target.Y, 5, 5, Color.WHITE);
         
         cam2D.EndMode2D();
     }

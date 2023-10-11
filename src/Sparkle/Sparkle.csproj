@@ -27,8 +27,12 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="content/icon.png">
+    <Content Include="Icon\Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\GameContent\GameContent.csproj" />
   </ItemGroup>
 </Project>

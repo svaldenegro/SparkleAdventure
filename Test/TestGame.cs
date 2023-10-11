@@ -1,7 +1,7 @@
 using Raylib_cs;
-using Sparkle.csharp;
-using Sparkle.csharp.file.config;
-using Sparkle.csharp.window;
+using Sparkle;
+using Sparkle.File.config;
+using Sparkle.Window;
 
 namespace Test; 
 
@@ -14,8 +14,8 @@ public class TestGame : Game {
     protected override void Init() {
         base.Init();
 
-        this.Overlay = new TestOverlay("Test");
-        this.Overlay.Enabled = false;
+        Overlay = new TestOverlay("Test");
+        Overlay.Enabled = false;
         
         Config config = new ConfigBuilder("config", "test")
             .Add("test", true)

@@ -1,9 +1,9 @@
 using System.Numerics;
-using Sparkle.csharp.graphics.util;
-using Sparkle.csharp.gui;
-using Sparkle.csharp.gui.element;
-using Sparkle.csharp.gui.element.data;
-using Sparkle.csharp.window;
+using Sparkle.Graphics.util;
+using Sparkle.Gui;
+using Sparkle.Gui.element;
+using Sparkle.Gui.element.data;
+using Sparkle.Window;
 using Color = Raylib_cs.Color;
 
 namespace Test; 
@@ -45,19 +45,19 @@ public class TestGui : Gui {
         }));
 */
         ToggleData toggleData = new ToggleData() {
-            ToggledText = "Checked"
+            toggledText = "Checked"
         };
         
         LabelData toggleLabelData = new LabelData() {
-            Font = FontHelper.GetDefault(),
-            FontSize = 25,
-            Spacing = 4,
-            Text = "Check",
-            Color = Color.RED
+            font = FontHelper.GetDefault(),
+            fontSize = 25,
+            spacing = 4,
+            text = "Check",
+            color = Color.RED
         };
 
         Vector2 pos = new Vector2((Window.GetRenderWidth() - 100F) / 2F, (Window.GetRenderHeight() - 100F) / 2F);
-        this.AddElement(new ToggleElement("toggle", toggleData, toggleLabelData, pos, new Vector2(100, 100)));
+        AddElement(new ToggleElement("toggle", toggleData, toggleLabelData, pos, new Vector2(100, 100)));
     }
 
     protected override void Update() {
